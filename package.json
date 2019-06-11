@@ -1,6 +1,6 @@
 {
-  "name": "tree-sitter-naniscript",
-  "version": "0.0.1",
+  "name": "tree-sitter-naninovel",
+  "version": "0.0.2",
   "description": "Naniscript grammar for tree-sitter.",
   "main": "index.js",
   "repository": {
