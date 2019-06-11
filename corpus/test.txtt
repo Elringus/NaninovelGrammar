@@ -1,0 +1,267 @@
+========
+Test comment
+========
+
+; comment
+---
+
+(program (comment))
+
+
+========
+Test define
+========
+
+> a b
+---
+
+(program (define (define_sign) (define_name) (define_val)))
+
+
+========
+Test command no params
+========
+
+@command
+---
+
+(program (command_line (command_name)))
+
+
+========
+Test command positive int param
+========
+
+@command 1
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command negative int param
+========
+
+@command -1
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command positive float param no fraction
+========
+
+@command 1.
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command positive float param with fraction
+========
+
+@command 1.10
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command negative float param no fraction
+========
+
+@command -1.
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command negative float param with fraction
+========
+
+@command -1.10
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command bool arg true
+========
+
+@command true
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command bool arg false
+========
+
+@command false
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command string arg one word
+========
+
+@command привет$command
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command string arg multiple words
+========
+
+@command "привет медведь"
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command string arg multiple words with quotes
+========
+
+@command "привет \"медведь\""
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command string arg pair
+========
+
+@command привет.медведь
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command arg string array
+========
+
+@command один,два,три
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command arg int array
+========
+
+@command 1,2,3
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+
+========
+Test command arg bool array
+========
+
+@command true,false,true
+---
+
+(program (command_line (command_name) (unnamed_arg)))
+
+========
+Test command named arg string
+========
+
+@command hi:медведь
+---
+
+(program (command_line (command_name) (named_arg)))
+
+========
+Test command named arg int
+========
+
+@command hi:1
+---
+
+(program (command_line (command_name) (named_arg)))
+
+
+========
+Test command named arg bool
+========
+
+@command hi:true
+---
+
+(program (command_line (command_name) (named_arg)))
+
+
+========
+Test command complete
+========
+
+@command 1 in:лес danger:true       
+---
+
+(program (command_line (command_name) (unnamed_arg) (named_arg) (named_arg)))
+
+========
+Test command complete with float list
+========
+
+@char 1 pos:0.25,-0.75 look:right       
+---
+
+(program (command_line (command_name) (unnamed_arg) (named_arg) (named_arg)))
+
+
+========
+Test label
+========
+
+# label  
+---
+
+(program (label (label_sign) (label_name)))
+
+
+========
+Test inline command
+========
+
+пример текста [command 1 danger:true] здесь еще текст [act danger:false true:false]
+---
+
+(program (ERROR (UNEXPECTED 1087)) (inline_action (command_name) (unnamed_arg) (named_arg)) (ERROR (UNEXPECTED 1079)) (inline_action (command_name) (named_arg) (named_arg)))
+
+
+========
+TwoActions in line
+========
+
+@action1
+@action2
+---
+
+(program (command_line (command_name)) (command_line (command_name)))
+
+
+========
+Overline bug
+========
+
+@i
+d  n
+---
+
+(program (command_line (command_name)) (ERROR))

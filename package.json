@@ -1,0 +1,30 @@
+{
+  "name": "naninovel-grammar",
+  "version": "0.0.1",
+  "description": "Naninovel script tree-sitter grammar.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Elringus/NaninovelGrammar"
+  },
+  "author": "Artem Klyukvin",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.13.2",
+    "prebuild-install": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3",
+    "prebuild": "^7.6.1",
+    "tree-sitter-cli": "0.13.0"
+  },
+  "scripts": {
+    "build": "tree-sitter generate && node-gyp build",
+    "install": "prebuild-install || node-gyp rebuild",
+    "pre-build": "prebuild --all --strip --verbose",
+    "pre-build:upload": "prebuild --upload-all",
+    "compile": "npm install && node-gyp configure && node_modules/.bin/tree-sitter generate && node-gyp build",
+    "test": "node_modules/.bin/tree-sitter test",
+    "test_complete": "rm -rf build && rm -rf binding.gyp && rm -rf index.js && rm -rf src && node_modules/.bin/tree-sitter generate && node-gyp configure && node-gyp build && node_modules/.bin/tree-sitter test"
+  }
+}
