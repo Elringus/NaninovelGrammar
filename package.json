@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-naninovel",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Naniscript grammar for tree-sitter.",
   "main": "index.js",
   "repository": {
@@ -16,7 +16,13 @@
     "tree-sitter-cli": "^0.15.3"
   },
   "scripts": {
-    "build": "tree-sitter generate && node-gyp build"
+    "build": "tree-sitter generate && node-gyp build",
+    "install": "prebuild-install || node-gyp rebuild",
+    "pre-build": "prebuild --all --strip --verbose",
+    "pre-build:upload": "prebuild --upload-all",
+    "compile": "npm install && node-gyp configure && node_modules/.bin/tree-sitter generate && node-gyp build",
+    "test": "node_modules/.bin/tree-sitter test",
+    "test_complete": "rm -rf build && rm -rf binding.gyp && rm -rf index.js && rm -rf src && node_modules/.bin/tree-sitter generate && node-gyp configure && node-gyp build && node_modules/.bin/tree-sitter test"
   },
   "tree-sitter": [
     {

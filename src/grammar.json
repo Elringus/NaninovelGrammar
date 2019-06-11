@@ -1,5 +1,5 @@
 {
-  "name": "tree-sitter-naninovel",
+  "name": "tree_sitter_nani_script",
   "rules": {
     "program": {
       "type": "REPEAT",
@@ -357,5 +357,7 @@
   ],
   "conflicts": [],
   "externals": [],
-  "inline": []
+  "inline": [],
+  "supertypes": []
 }
+

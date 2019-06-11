@@ -242,7 +242,7 @@ Test inline command
 пример текста [command 1 danger:true] здесь еще текст [act danger:false true:false]
 ---
 
-(program (ERROR (UNEXPECTED 1087)) (inline_action (command_name) (unnamed_arg) (named_arg)) (ERROR (UNEXPECTED 1079)) (inline_action (command_name) (named_arg) (named_arg)))
+(program (ERROR (UNEXPECTED 1087)) (inline_command (command_name) (unnamed_arg) (named_arg)) (ERROR (UNEXPECTED 1079)) (inline_command (command_name) (named_arg) (named_arg)))
 
 
 ========

@@ -1,0 +1,79 @@
+[
+  {
+    "type": "command_line",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "command_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "define",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "define_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "inline_command",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "label",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "label_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "program",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "label_sign",
+    "named": true
+  },
+  {
+    "type": "define_val",
+    "named": true
+  },
+  {
+    "type": "define_sign",
+    "named": true
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
+  },
+  {
+    "type": "unnamed_arg",
+    "named": true
+  },
+  {
+    "type": "named_arg",
+    "named": true
+  }
+]
