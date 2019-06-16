@@ -177,6 +177,16 @@ Test command arg bool array
 
 (program (command_line (command_name) (unnamed_arg)))
 
+
+========
+Test command arg substitution
+========
+
+@command {hi_there}
+---
+
+(program (command_line (command_name) (substitution)))
+
 ========
 Test command named arg string
 ========
@@ -204,6 +214,16 @@ Test command named arg bool
 ---
 
 (program (command_line (command_name) (named_arg)))
+
+
+========
+Test command named arg substitution
+========
+
+@command {hi_there}
+---
+
+(program (command_line (command_name) (substitution)))
 
 
 ========

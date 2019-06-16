@@ -75,5 +75,9 @@
   {
     "type": "named_arg",
     "named": true
+  },
+  {
+    "type": "substitution",
+    "named": true
   }
 ]

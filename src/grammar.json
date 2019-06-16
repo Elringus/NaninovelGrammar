@@ -133,16 +133,48 @@
       "value": ">"
     },
     "command_line": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_non_inlined_name"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_non_inlined_name"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_hor_space"
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SYMBOL",
+                        "name": "unnamed_arg"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "substitution"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "REPEAT",
+            "content": {
               "type": "SEQ",
               "members": [
                 {
@@ -150,45 +182,35 @@
                   "name": "_hor_space"
                 },
                 {
-                  "type": "SYMBOL",
-                  "name": "unnamed_arg"
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "named_arg"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "substitution"
+                    }
+                  ]
                 }
               ]
-            },
-            {
-              "type": "BLANK"
             }
-          ]
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
+          },
+          {
+            "type": "CHOICE",
             "members": [
               {
                 "type": "SYMBOL",
                 "name": "_hor_space"
               },
               {
-                "type": "SYMBOL",
-                "name": "named_arg"
+                "type": "BLANK"
               }
             ]
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_hor_space"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
+        ]
+      }
     },
     "inline_command": {
       "type": "SEQ",
@@ -280,7 +302,7 @@
         "members": [
           {
             "type": "PATTERN",
-            "value": "[^\"\\n\\s:\\[\\]@]+"
+            "value": "[^\"\\n\\s:\\[\\]{}@]+"
           },
           {
             "type": "SEQ",
@@ -320,7 +342,7 @@
             "members": [
               {
                 "type": "PATTERN",
-                "value": "[^\\n\\s:\\[\\]]+"
+                "value": "[^\\n\\s:\\[\\]{}]+"
               },
               {
                 "type": "SEQ",
@@ -344,6 +366,48 @@
         ]
       }
     },
+    "substitution": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "{"
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[^\\n\\s:\\[\\]{}]+"
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": "\""
+                  },
+                  {
+                    "type": "PATTERN",
+                    "value": "[^\\n\\s]*"
+                  },
+                  {
+                    "type": "STRING",
+                    "value": "\""
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": "}"
+          }
+        ]
+      }
+    },
     "_hor_space": {
       "type": "PATTERN",
       "value": "[ \\t]+"
@@ -357,5 +421,7 @@
   ],
   "conflicts": [],
   "externals": [],
-  "inline": []
+  "inline": [],
+  "supertypes": []
 }
+
