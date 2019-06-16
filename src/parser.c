@@ -5,13 +5,12 @@
 #pragma GCC diagnostic ignored "-Wmissing-field-initializers"
 #endif
 
-#define LANGUAGE_VERSION 10
-#define STATE_COUNT 46
+#define LANGUAGE_VERSION 9
+#define STATE_COUNT 47
 #define SYMBOL_COUNT 24
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 12
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 0
 #define MAX_ALIAS_SEQUENCE_LENGTH 7
 
 enum {
@@ -611,23 +610,24 @@ static TSLexMode ts_lex_modes[STATE_COUNT] = {
   [26] = {.lex_state = 18},
   [27] = {.lex_state = 20},
   [28] = {.lex_state = 14},
-  [29] = {.lex_state = 20},
+  [29] = {.lex_state = 18},
   [30] = {.lex_state = 18},
   [31] = {.lex_state = 14},
   [32] = {.lex_state = 21},
   [33] = {.lex_state = 14},
   [34] = {.lex_state = 33},
-  [35] = {.lex_state = 14},
-  [36] = {.lex_state = 18},
-  [37] = {.lex_state = 14},
+  [35] = {.lex_state = 21},
+  [36] = {.lex_state = 14},
+  [37] = {.lex_state = 18},
   [38] = {.lex_state = 14},
-  [39] = {.lex_state = 33},
-  [40] = {.lex_state = 14},
-  [41] = {.lex_state = 21},
-  [42] = {.lex_state = 14},
+  [39] = {.lex_state = 14},
+  [40] = {.lex_state = 33},
+  [41] = {.lex_state = 14},
+  [42] = {.lex_state = 21},
   [43] = {.lex_state = 14},
-  [44] = {.lex_state = 33},
-  [45] = {.lex_state = 14},
+  [44] = {.lex_state = 14},
+  [45] = {.lex_state = 33},
+  [46] = {.lex_state = 14},
 };
 
 static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
@@ -822,12 +822,12 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_AT] = ACTIONS(100),
   },
   [25] = {
-    [aux_sym_command_line_repeat1] = STATE(29),
+    [aux_sym_command_line_repeat1] = STATE(35),
     [sym__hor_space] = ACTIONS(102),
     [anon_sym_RBRACK] = ACTIONS(104),
   },
   [26] = {
-    [aux_sym_command_line_repeat1] = STATE(36),
+    [aux_sym_command_line_repeat1] = STATE(37),
     [sym_define_sign] = ACTIONS(106),
     [sym_label_sign] = ACTIONS(106),
     [ts_builtin_sym_end] = ACTIONS(108),
@@ -858,11 +858,10 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
   [29] = {
     [aux_sym_command_line_repeat1] = STATE(29),
     [sym_define_sign] = ACTIONS(112),
+    [sym_label_sign] = ACTIONS(112),
+    [sym__hor_space] = ACTIONS(116),
     [ts_builtin_sym_end] = ACTIONS(114),
     [anon_sym_LBRACK] = ACTIONS(112),
-    [sym__hor_space] = ACTIONS(116),
-    [sym_label_sign] = ACTIONS(112),
-    [anon_sym_RBRACK] = ACTIONS(112),
     [aux_sym_comment_token1] = ACTIONS(112),
     [anon_sym_AT] = ACTIONS(112),
   },
@@ -884,7 +883,7 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_AT] = ACTIONS(125),
   },
   [32] = {
-    [aux_sym_command_line_repeat1] = STATE(41),
+    [aux_sym_command_line_repeat1] = STATE(42),
     [sym__hor_space] = ACTIONS(127),
     [anon_sym_RBRACK] = ACTIONS(129),
   },
@@ -901,6 +900,11 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [anon_sym_RBRACK] = ACTIONS(133),
   },
   [35] = {
+    [aux_sym_command_line_repeat1] = STATE(35),
+    [anon_sym_RBRACK] = ACTIONS(112),
+    [sym__hor_space] = ACTIONS(116),
+  },
+  [36] = {
     [sym_define_sign] = ACTIONS(135),
     [sym_label_sign] = ACTIONS(135),
     [ts_builtin_sym_end] = ACTIONS(135),
@@ -909,7 +913,7 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_comment_token1] = ACTIONS(135),
     [anon_sym_AT] = ACTIONS(135),
   },
-  [36] = {
+  [37] = {
     [aux_sym_command_line_repeat1] = STATE(29),
     [sym_define_sign] = ACTIONS(137),
     [sym_label_sign] = ACTIONS(137),
@@ -919,10 +923,10 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_comment_token1] = ACTIONS(137),
     [anon_sym_AT] = ACTIONS(137),
   },
-  [37] = {
+  [38] = {
     [sym_named_arg] = ACTIONS(76),
   },
-  [38] = {
+  [39] = {
     [sym_define_sign] = ACTIONS(141),
     [sym_label_sign] = ACTIONS(141),
     [ts_builtin_sym_end] = ACTIONS(141),
@@ -930,11 +934,11 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_comment_token1] = ACTIONS(141),
     [anon_sym_AT] = ACTIONS(141),
   },
-  [39] = {
+  [40] = {
     [sym_named_arg] = ACTIONS(76),
     [anon_sym_RBRACK] = ACTIONS(143),
   },
-  [40] = {
+  [41] = {
     [sym_define_sign] = ACTIONS(145),
     [sym_label_sign] = ACTIONS(145),
     [ts_builtin_sym_end] = ACTIONS(145),
@@ -942,12 +946,12 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_comment_token1] = ACTIONS(145),
     [anon_sym_AT] = ACTIONS(145),
   },
-  [41] = {
-    [aux_sym_command_line_repeat1] = STATE(29),
+  [42] = {
+    [aux_sym_command_line_repeat1] = STATE(35),
     [sym__hor_space] = ACTIONS(147),
     [anon_sym_RBRACK] = ACTIONS(149),
   },
-  [42] = {
+  [43] = {
     [sym_define_sign] = ACTIONS(151),
     [sym_label_sign] = ACTIONS(151),
     [ts_builtin_sym_end] = ACTIONS(151),
@@ -956,7 +960,7 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_comment_token1] = ACTIONS(151),
     [anon_sym_AT] = ACTIONS(151),
   },
-  [43] = {
+  [44] = {
     [sym_define_sign] = ACTIONS(153),
     [sym_label_sign] = ACTIONS(153),
     [ts_builtin_sym_end] = ACTIONS(153),
@@ -964,11 +968,11 @@ static uint16_t ts_parse_table[STATE_COUNT][SYMBOL_COUNT] = {
     [aux_sym_comment_token1] = ACTIONS(153),
     [anon_sym_AT] = ACTIONS(153),
   },
-  [44] = {
+  [45] = {
     [sym_named_arg] = ACTIONS(76),
     [anon_sym_RBRACK] = ACTIONS(155),
   },
-  [45] = {
+  [46] = {
     [sym_define_sign] = ACTIONS(157),
     [sym_label_sign] = ACTIONS(157),
     [ts_builtin_sym_end] = ACTIONS(157),
@@ -1032,29 +1036,29 @@ static TSParseActionEntry ts_parse_actions[] = {
   [104] = {.count = 1, .reusable = false}, SHIFT(33),
   [106] = {.count = 1, .reusable = false}, REDUCE(sym_command_line, 3),
   [108] = {.count = 1, .reusable = true}, REDUCE(sym_command_line, 3),
-  [110] = {.count = 1, .reusable = true}, SHIFT(35),
+  [110] = {.count = 1, .reusable = true}, SHIFT(36),
   [112] = {.count = 1, .reusable = false}, REDUCE(aux_sym_command_line_repeat1, 2),
   [114] = {.count = 1, .reusable = true}, REDUCE(aux_sym_command_line_repeat1, 2),
-  [116] = {.count = 2, .reusable = true}, REDUCE(aux_sym_command_line_repeat1, 2), SHIFT_REPEAT(37),
+  [116] = {.count = 2, .reusable = true}, REDUCE(aux_sym_command_line_repeat1, 2), SHIFT_REPEAT(38),
   [119] = {.count = 1, .reusable = false}, REDUCE(sym_define, 4),
   [121] = {.count = 1, .reusable = true}, REDUCE(sym_define, 4),
-  [123] = {.count = 1, .reusable = true}, SHIFT(38),
+  [123] = {.count = 1, .reusable = true}, SHIFT(39),
   [125] = {.count = 1, .reusable = true}, REDUCE(sym_label, 4),
-  [127] = {.count = 1, .reusable = true}, SHIFT(39),
-  [129] = {.count = 1, .reusable = false}, SHIFT(40),
+  [127] = {.count = 1, .reusable = true}, SHIFT(40),
+  [129] = {.count = 1, .reusable = false}, SHIFT(41),
   [131] = {.count = 1, .reusable = true}, REDUCE(sym_inline_command, 4),
-  [133] = {.count = 1, .reusable = true}, SHIFT(40),
+  [133] = {.count = 1, .reusable = true}, SHIFT(41),
   [135] = {.count = 1, .reusable = true}, REDUCE(sym_command_line, 4),
   [137] = {.count = 1, .reusable = false}, REDUCE(sym_command_line, 4),
-  [139] = {.count = 1, .reusable = true}, SHIFT(42),
+  [139] = {.count = 1, .reusable = true}, SHIFT(43),
   [141] = {.count = 1, .reusable = true}, REDUCE(sym_define, 5),
-  [143] = {.count = 1, .reusable = true}, SHIFT(43),
+  [143] = {.count = 1, .reusable = true}, SHIFT(44),
   [145] = {.count = 1, .reusable = true}, REDUCE(sym_inline_command, 5),
-  [147] = {.count = 1, .reusable = true}, SHIFT(44),
-  [149] = {.count = 1, .reusable = false}, SHIFT(43),
+  [147] = {.count = 1, .reusable = true}, SHIFT(45),
+  [149] = {.count = 1, .reusable = false}, SHIFT(44),
   [151] = {.count = 1, .reusable = true}, REDUCE(sym_command_line, 5),
   [153] = {.count = 1, .reusable = true}, REDUCE(sym_inline_command, 6),
-  [155] = {.count = 1, .reusable = true}, SHIFT(45),
+  [155] = {.count = 1, .reusable = true}, SHIFT(46),
   [157] = {.count = 1, .reusable = true}, REDUCE(sym_inline_command, 7),
 };
 
@@ -1062,7 +1066,7 @@ static TSParseActionEntry ts_parse_actions[] = {
 #define extern __declspec(dllexport)
 #endif
 
-extern const TSLanguage *tree_sitter_naninovel(void) {
+extern const TSLanguage *tree_sitter_naniscript() {
   static TSLanguage language = {
     .version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,
@@ -1073,7 +1077,6 @@ extern const TSLanguage *tree_sitter_naninovel(void) {
     .parse_actions = ts_parse_actions,
     .lex_modes = ts_lex_modes,
     .symbol_names = ts_symbol_names,
-    .field_count = FIELD_COUNT,
     .max_alias_sequence_length = MAX_ALIAS_SEQUENCE_LENGTH,
     .lex_fn = ts_lex,
     .external_token_count = EXTERNAL_TOKEN_COUNT,
