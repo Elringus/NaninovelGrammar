@@ -31,7 +31,7 @@
     "ignore": [
       "build/",
       "src/"
-      ]
+    ]
   },
   "tree-sitter": [
     {
