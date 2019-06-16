@@ -19,8 +19,8 @@
     "tree-sitter-cli": "^0.14.7"
   },
   "scripts": {
-    "build": "tree-sitter generate && node-gyp build",
-    "install": "prebuild-install || node-gyp rebuild",
+    "build": "tree-sitter generate && node-gyp build --loglevel=silent",
+    "install": "prebuild-install || node-gyp rebuild --loglevel=silent",
     "pre-build": "prebuild --all --strip --verbose",
     "pre-build:upload": "prebuild --upload-all",
     "compile": "npm install && node-gyp configure && node_modules/.bin/tree-sitter generate && node-gyp build",
