@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "tree_sitter_tree_sitter_nani_script_binding",
+      "target_name": "tree_sitter_naninovel_binding",
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
         "src"

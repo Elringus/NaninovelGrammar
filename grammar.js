@@ -1,6 +1,6 @@
 module.exports = grammar({
-  name: "tree_sitter_nani_script",
-  scopeName: "source.nani",
+  name: "naniscript",
+  scopeName: "source.naniscript",
 
   rules: {
     program: $ => repeat(choice(

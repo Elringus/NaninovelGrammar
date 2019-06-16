@@ -4,7 +4,7 @@
 
 using namespace v8;
 
-extern "C" TSLanguage * tree_sitter_tree_sitter_nani_script();
+extern "C" TSLanguage * tree_sitter_naninovel();
 
 namespace {
 
@@ -17,12 +17,12 @@ void Init(Handle<Object> exports, Handle<Object> module) {
 
   Local<Function> constructor = tpl->GetFunction();
   Local<Object> instance = constructor->NewInstance(Nan::GetCurrentContext()).ToLocalChecked();
-  Nan::SetInternalFieldPointer(instance, 0, tree_sitter_tree_sitter_nani_script());
+  Nan::SetInternalFieldPointer(instance, 0, tree_sitter_naninovel());
 
-  instance->Set(Nan::New("name").ToLocalChecked(), Nan::New("tree_sitter_nani_script").ToLocalChecked());
+  instance->Set(Nan::New("name").ToLocalChecked(), Nan::New("tree_sitter_naninovel").ToLocalChecked());
   module->Set(Nan::New("exports").ToLocalChecked(), instance);
 }
 
-NODE_MODULE(tree_sitter_tree_sitter_nani_script_binding, Init)
+NODE_MODULE(tree_sitter_naninovel_binding, Init)
 
 }  // namespace

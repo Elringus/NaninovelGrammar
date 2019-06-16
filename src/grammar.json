@@ -1,5 +1,5 @@
 {
-  "name": "tree_sitter_nani_script",
+  "name": "naniscript",
   "rules": {
     "program": {
       "type": "REPEAT",

@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-naninovel",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Naniscript grammar for tree-sitter.",
   "main": "index.js",
   "repository": {
@@ -10,10 +10,13 @@
   "author": "Artem Klyukvin",
   "license": "MIT",
   "dependencies": {
-    "nan": "^2.13.2"
+    "nan": "^2.10.0",
+    "prebuild-install": "^5.0.0"
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.15.3"
+    "nodemon": "^1.18.3",
+    "prebuild": "^7.6.1",
+    "tree-sitter-cli": "^0.14.7"
   },
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
@@ -23,6 +26,12 @@
     "compile": "npm install && node-gyp configure && node_modules/.bin/tree-sitter generate && node-gyp build",
     "test": "node_modules/.bin/tree-sitter test",
     "test_complete": "rm -rf build && rm -rf binding.gyp && rm -rf index.js && rm -rf src && node_modules/.bin/tree-sitter generate && node-gyp configure && node-gyp build && node_modules/.bin/tree-sitter test"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build/",
+      "src/"
+      ]
   },
   "tree-sitter": [
     {

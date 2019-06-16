@@ -1062,7 +1062,7 @@ static TSParseActionEntry ts_parse_actions[] = {
 #define extern __declspec(dllexport)
 #endif
 
-extern const TSLanguage *tree_sitter_tree_sitter_nani_script(void) {
+extern const TSLanguage *tree_sitter_naninovel(void) {
   static TSLanguage language = {
     .version = LANGUAGE_VERSION,
     .symbol_count = SYMBOL_COUNT,
