@@ -1,5 +1,6 @@
 node_modules
 build
+prebuilds
 *.log
 .idea
 out
@@ -7,3 +8,4 @@ vendor
 .vs
 package-lock.json
 yarn.lock
+.prebuildrc
