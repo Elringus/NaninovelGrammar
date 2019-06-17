@@ -1,267 +1,232 @@
 ========
 Test comment
 ========
-
 ; comment
 ---
-
-(program (comment))
-
+(fragment (comment))
 
 ========
 Test define
 ========
-
-> a b
+>DefineKey define _ + 3h f[29 j] value *
 ---
-
-(program (define (define_sign) (define_name) (define_val)))
-
-
-========
-Test command no params
-========
-
-@command
----
-
-(program (command_line (command_name)))
-
-
-========
-Test command positive int param
-========
-
-@command 1
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command negative int param
-========
-
-@command -1
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command positive float param no fraction
-========
-
-@command 1.
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command positive float param with fraction
-========
-
-@command 1.10
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command negative float param no fraction
-========
-
-@command -1.
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command negative float param with fraction
-========
-
-@command -1.10
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command bool arg true
-========
-
-@command true
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command bool arg false
-========
-
-@command false
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command string arg one word
-========
-
-@command привет$command
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command string arg multiple words
-========
-
-@command "привет медведь"
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command string arg multiple words with quotes
-========
-
-@command "привет \"медведь\""
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command string arg pair
-========
-
-@command привет.медведь
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command arg string array
-========
-
-@command один,два,три
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command arg int array
-========
-
-@command 1,2,3
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-
-========
-Test command arg bool array
-========
-
-@command true,false,true
----
-
-(program (command_line (command_name) (unnamed_arg)))
-
-========
-Test command named arg string
-========
-
-@command hi:медведь
----
-
-(program (command_line (command_name) (named_arg)))
-
-========
-Test command named arg int
-========
-
-@command hi:1
----
-
-(program (command_line (command_name) (named_arg)))
-
-
-========
-Test command named arg bool
-========
-
-@command hi:true
----
-
-(program (command_line (command_name) (named_arg)))
-
-
-========
-Test command complete
-========
-
-@command 1 in:лес danger:true       
----
-
-(program (command_line (command_name) (unnamed_arg) (named_arg) (named_arg)))
-
-========
-Test command complete with float list
-========
-
-@char 1 pos:0.25,-0.75 look:right       
----
-
-(program (command_line (command_name) (unnamed_arg) (named_arg) (named_arg)))
-
+(fragment (define (define_key) (define_value)))
 
 ========
 Test label
 ========
-
-# label  
+# label
 ---
+(fragment (label (label_id)))
 
-(program (label (label_sign) (label_name)))
+========
+Test command no params
+========
+@command
+---
+(fragment (command (command_id)))
 
+========
+Test command positive int param
+========
+@command 1
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command negative int param
+========
+@command -1
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command positive float param no fraction
+========
+@command 1.
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command positive float param with fraction
+========
+@command 1.10
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command negative float param no fraction
+========
+@command -1.
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command negative float param with fraction
+========
+@command -1.10
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command bool arg true
+========
+@command true
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command bool arg false
+========
+@command false
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command string arg one word
+========
+@command hello$command
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command string arg multiple words
+========
+@command "hello grizzly"
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command string arg multiple words with quotes
+========
+@command "hello \"grizzly\""
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command string arg pair
+========
+@command hello.grizzly
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command arg string array
+========
+@command one,two,three
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command arg int array
+========
+@command 1,2,3
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command arg bool array
+========
+@command true,false,true
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value))))
+
+========
+Test command named arg string
+========
+@command hi:grizzly
+---
+(fragment (command (command_id) (command_param (command_param_id) (command_param_value))))
+
+========
+Test command named arg int
+========
+@command hi:1
+---
+(fragment (command (command_id) (command_param (command_param_id) (command_param_value))))
+
+========
+Test command named arg bool
+========
+@command hi:true
+---
+(fragment (command (command_id) (command_param (command_param_id) (command_param_value))))
+
+========
+Test command complete
+========
+@command 1 in:forest danger:true
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value)) ))
+
+========
+Test command complete with float list
+========
+@char 1 pos:0.25,-0.75 look:right
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value)) ))
 
 ========
 Test inline command
 ========
-
-пример текста [command 1 danger:true] здесь еще текст [act danger:false true:false]
+text example[command 1 danger:true] more text here [act danger:false true:false]
 ---
-
-(program (ERROR (UNEXPECTED 1087)) (inline_command (command_name) (unnamed_arg) (named_arg)) (ERROR (UNEXPECTED 1079)) (inline_command (command_name) (named_arg) (named_arg)))
-
+(fragment (generic_text) (inlined_command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value))) (generic_text) (inlined_command (command_id) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value))))
 
 ========
-TwoActions in line
+Two actions in line
 ========
-
 @action1
 @action2
 ---
-
-(program (command_line (command_name)) (command_line (command_name)))
-
+(fragment (command (command_id)) (command (command_id)))
 
 ========
 Overline bug
 ========
-
 @i
 d  n
 ---
+(fragment (command (command_id)) (generic_text))
 
-(program (command_line (command_name)) (ERROR))
+========
+Expression
+========
+{ Abs(a, d) + 12 - 1 / -230.0 + "Lol ipsum" }
+---
+(fragment (expression))
+
+========
+Expressions inside a generic text line
+========
+actor: Loreim ipsu,{ Abs(a, d) + 12 - 1 / -230.0 + "Lol ipsum" } doler sit amen {¯\_(ツ)_/¯}.
+---
+(fragment (generic_text) (expression) (generic_text) (expression) (generic_text))
+
+========
+Expression instead of named parameter value
+========
+@command param:{x > 0}
+---
+(fragment (command (command_id) (command_param (command_param_id) (command_param_value (expression)))))
+
+========
+Expressions blended with named parameter value
+========
+@command param:32r2f,df{x > 0},d.{Abs(0) + 12.24 > 0}ff
+---
+(fragment (command (command_id) (command_param (command_param_id) (command_param_value (expression) (expression)))))
+
+========
+Expression blended with nameless parameter value
+========
+@command sdf{x > 0}df
+---
+(fragment (command (command_id) (command_nameless_param (command_param_value (expression)))))
+
+========
+Expression instead of named parameter ID
+========
+@command { 0 > 0 }:{x > 0}
+---
+(fragment (command (command_id) (command_param (command_param_id (expression)) (command_param_value (expression)))))

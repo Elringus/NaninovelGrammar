@@ -1,16 +1,31 @@
 [
   {
-    "type": "command_line",
+    "type": "command",
     "named": true,
     "fields": {}
   },
   {
-    "type": "command_name",
+    "type": "command_id",
     "named": true,
     "fields": {}
   },
   {
-    "type": "comment",
+    "type": "command_nameless_param",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "command_param",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "command_param_id",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "command_param_value",
     "named": true,
     "fields": {}
   },
@@ -20,12 +35,17 @@
     "fields": {}
   },
   {
-    "type": "define_name",
+    "type": "define_key",
     "named": true,
     "fields": {}
   },
   {
-    "type": "inline_command",
+    "type": "fragment",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "inlined_command",
     "named": true,
     "fields": {}
   },
@@ -35,26 +55,37 @@
     "fields": {}
   },
   {
-    "type": "label_name",
+    "type": "label_id",
     "named": true,
     "fields": {}
   },
   {
-    "type": "program",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "label_sign",
+    "type": "comment",
     "named": true
   },
   {
-    "type": "define_val",
+    "type": "expression",
     "named": true
   },
   {
-    "type": "define_sign",
+    "type": "generic_text",
     "named": true
+  },
+  {
+    "type": ">",
+    "named": false
+  },
+  {
+    "type": "define_value",
+    "named": true
+  },
+  {
+    "type": "#",
+    "named": false
+  },
+  {
+    "type": "@",
+    "named": false
   },
   {
     "type": "[",
@@ -65,15 +96,7 @@
     "named": false
   },
   {
-    "type": "@",
+    "type": "\"",
     "named": false
-  },
-  {
-    "type": "unnamed_arg",
-    "named": true
-  },
-  {
-    "type": "named_arg",
-    "named": true
   }
 ]

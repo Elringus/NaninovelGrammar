@@ -3,74 +3,63 @@ module.exports = grammar({
   scopeName: "source.naniscript",
 
   rules: {
-    program: $ => repeat(choice(
+    fragment: $ => repeat($._node),
+
+    _node: $ => choice(
       $.comment,
       $.define,
-      $.command_line,
       $.label,
-      $.inline_command,
-    )),
-    
-    label: $ => seq($.label_sign, $._hor_space, $.label_name, optional($._hor_space)),
-    label_name: $ => /\w+/,
-    label_sign: $ => '#',
-
-    comment: $ => seq(/;.*/, optional($._hor_space)),
-
-    define: $ => seq($.define_sign, $.define_name, $._hor_space, $.define_val, optional($._hor_space)),
-    define_name: $ => /\w+/,
-    define_val: $ => /[^\n\[\]]+/,
-    define_sign: $ => '>',
-
-    command_line: $ => seq(
-        $._non_inlined_name,
-        optional(seq($._hor_space, $.unnamed_arg)),
-        repeat(seq($._hor_space, $.named_arg)),
-        optional($._hor_space)
+      $.command,
+      $.inlined_command,
+      $.generic_text,
+      $.expression
     ),
 
-    inline_command: $ => seq(
+    comment: $ => /;[^\r\n]*/,
+
+    expression: $ => token(prec(1, /{[^{}\r\n]+}/)),
+
+    generic_text: $ => token(prec(-1, /[^\r\n\[\]{}]+/)),
+
+    define: $ => seq('>', $.define_key, $._hor_space, $.define_value),
+    define_key: $ => /[a-zA-Z0-9_]+/,
+    define_value: $ => /[^{}\r\n]+/,
+
+    label: $ => seq('#', optional($._hor_space), $.label_id),
+    label_id: $ => /[a-zA-Z0-9_]+/,
+
+    command: $ => seq(
+        '@',
+        $.command_id,
+        optional($.command_nameless_param),
+        repeat($.command_param),
+    ),
+    inlined_command: $ => seq(
         '[',
-        $.command_name,
-        optional(seq($._hor_space, $.unnamed_arg)),
-        repeat(seq($._hor_space, $.named_arg)),
-        optional($._hor_space),
+        $.command_id,
+        optional($.command_nameless_param),
+        repeat($.command_param),
         ']'
     ),
-
-    _non_inlined_name: $ => seq(
-      '@', $.command_name,
+    command_id: $ => /[a-zA-Z0-9_]+/,
+    command_param: $ => seq(
+        $._hor_space,
+        $.command_param_id,
+        $.command_param_value,
     ),
-
-    command_name: $ => /\w+/,
-    unnamed_arg: $ => token(
-      choice(
-        /[^"\n\s:\[\]@]+/,
-        seq(
-          '"', /[^\n\[\]]*/, '"'
-        ),
-      )
+    command_nameless_param: $ => seq(
+      $._hor_space,
+      $.command_param_value,
     ),
+    command_param_id: $ => prec.left(seq(
+      //repeat1(choice($.expression, /[a-zA-Z0-9_]+/)),
+      /[a-zA-Z0-9_]+:/,
+    )),
+    command_param_value: $ => prec.right(repeat1(choice(
+      $.expression,
+      choice(/[^"\s:\[\]{}@]+/, seq('"', /(\\.|[^"\n\[\]{}])*/, '"'))
+    ))),
 
-    // named_arg: $ => seq(
-    //   $.named_arg_name,
-    //   ':',
-    //   $.named_arg_val
-    // ),
-    
-    named_arg: $ => token(
-      seq(
-        /[a-zA-Z0-9_]+/, 
-        ':', 
-        choice(
-          /[^\n\s:\[\]]+/, 
-          seq(
-            '"', /[^\n\[\]]*/, '"'
-          ),
-        )
-      )
-    ),
-
-    _hor_space: $ => /[ \t]+/
+    _hor_space: $ => /[ \t]+/,
   }
 });
