@@ -20,11 +20,6 @@
     "fields": {}
   },
   {
-    "type": "command_param_id",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "command_param_value",
     "named": true,
     "fields": {}
@@ -94,6 +89,10 @@
   {
     "type": "]",
     "named": false
+  },
+  {
+    "type": "command_param_id",
+    "named": true
   },
   {
     "type": "\"",

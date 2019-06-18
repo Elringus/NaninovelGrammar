@@ -14,6 +14,7 @@ module.exports = grammar({
       $.generic_text,
       $.expression
     ),
+    _hor_space: $ => /[ \t]+/,
 
     comment: $ => /;[^\r\n]*/,
 
@@ -51,15 +52,10 @@ module.exports = grammar({
       $._hor_space,
       $.command_param_value,
     ),
-    command_param_id: $ => prec.left(seq(
-      //repeat1(choice($.expression, /[a-zA-Z0-9_]+/)),
-      /[a-zA-Z0-9_]+:/,
-    )),
+    command_param_id: $ => /[a-zA-Z0-9_]+:/,
     command_param_value: $ => prec.right(repeat1(choice(
       $.expression,
       choice(/[^"\s:\[\]{}@]+/, seq('"', /(\\.|[^"\n\[\]{}])*/, '"'))
     ))),
-
-    _hor_space: $ => /[ \t]+/,
   }
 });
