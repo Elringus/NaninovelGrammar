@@ -20,7 +20,8 @@
   "scripts": {
     "build": "tree-sitter generate && node-gyp build",
     "install": "prebuild-install || node-gyp rebuild",
-    "pre-build": "prebuild -r electron -t 1.8.0 -t 2.0.0 -t 3.0.0 -t 4.0.0 --strip && prebuild --upload-all",
+    "cleanup": "rm -rf build && rm -rf prebuilds",
+    "pre-build": "yarn run cleanup && prebuild -r electron -t 1.8.0 -t 2.0.0 -t 3.0.0 -t 4.0.0 --strip && prebuild --upload-all",
     "pre-build:upload": "prebuild --upload-all",
     "compile": "npm install && node-gyp configure && node_modules/.bin/tree-sitter generate && node-gyp build",
     "test": "node_modules/.bin/tree-sitter test",

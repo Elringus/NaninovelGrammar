@@ -2,39 +2,63 @@ module.exports = grammar({
   name: "naniscript",
   scopeName: "source.naniscript",
 
-  rules: {
-    fragment: $ => repeat($._node),
+  // externals: $ => [
+  //   $.expression,
+  // ],
 
-    _node: $ => choice(
-      $.comment,
-      $.define,
-      $.label,
-      $.command,
-      $.inlined_command,
-      $.generic_text,
-      $.expression
+  extras: $ => [],
+
+  rules: {
+    script: $ => seq(repeat(seq($.line, /[\n\r]+/)), optional($.line)),
+    line: $ => seq(
+      optional(/[ \t]*/),
+      choice(
+        $.comment,
+        $.define,
+        $.label,
+        $.command,
+        $.generic_text
+      ),
+      optional(/[ \t]*/),
     ),
-    _hor_space: $ => /[ \t]+/,
 
     comment: $ => /;[^\r\n]*/,
 
-    expression: $ => token(prec(1, /{[^{}\r\n]+}/)),
-
-    generic_text: $ => token(prec(-1, /[^\r\n\[\]{}]+/)),
-
-    define: $ => seq('>', $.define_key, $._hor_space, $.define_value),
+    define: $ => seq('>', $.define_key, /[ \t]+/, $.define_value),
     define_key: $ => /[a-zA-Z0-9_]+/,
     define_value: $ => /[^{}\r\n]+/,
 
-    label: $ => seq('#', optional($._hor_space), $.label_id),
+    label: $ => seq('#', /[ \t]*/, $.label_id),
     label_id: $ => /[a-zA-Z0-9_]+/,
 
     command: $ => seq(
         '@',
         $.command_id,
         optional($.command_nameless_param),
-        repeat($.command_param),
+        repeat($.command_param)
     ),
+    command_id: $ => /[a-zA-Z0-9_]+/,
+    command_param: $ => seq(
+        /[ \t]+/,
+        $.command_param_id,
+        $.command_param_value,
+    ),
+    command_nameless_param: $ => seq(
+      /[ \t]+/,
+      $.command_param_value,
+    ),
+    command_param_id: $ => /[a-zA-Z0-9_]+:/,
+    command_param_value: $ => choice(
+      seq('"', choice(repeat1(/(\\.|[^"\r\n\[\]{}])+/), $.expression), '"'),
+      repeat1(choice(/[^"\s\r\n:\[\]{}@]+/, $.expression))
+    ),
+
+    generic_text: $ => prec(-1, repeat1(choice(
+       $.expression,
+       $.inlined_command,
+       /[^\r\n\[\]{}]+/
+    ))),
+
     inlined_command: $ => seq(
         '[',
         $.command_id,
@@ -42,20 +66,7 @@ module.exports = grammar({
         repeat($.command_param),
         ']'
     ),
-    command_id: $ => /[a-zA-Z0-9_]+/,
-    command_param: $ => seq(
-        $._hor_space,
-        $.command_param_id,
-        $.command_param_value,
-    ),
-    command_nameless_param: $ => seq(
-      $._hor_space,
-      $.command_param_value,
-    ),
-    command_param_id: $ => /[a-zA-Z0-9_]+:/,
-    command_param_value: $ => prec.right(repeat1(choice(
-      $.expression,
-      choice(/[^"\s:\[\]{}@]+/, seq('"', /(\\.|[^"\n\[\]{}])*/, '"'))
-    ))),
+
+    expression: $ => seq('{', /[^\r\n{}]*/, '}'),
   }
 });

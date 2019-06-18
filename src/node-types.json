@@ -35,7 +35,12 @@
     "fields": {}
   },
   {
-    "type": "fragment",
+    "type": "expression",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "generic_text",
     "named": true,
     "fields": {}
   },
@@ -55,15 +60,17 @@
     "fields": {}
   },
   {
+    "type": "line",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "script",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comment",
-    "named": true
-  },
-  {
-    "type": "expression",
-    "named": true
-  },
-  {
-    "type": "generic_text",
     "named": true
   },
   {
@@ -83,6 +90,14 @@
     "named": false
   },
   {
+    "type": "command_param_id",
+    "named": true
+  },
+  {
+    "type": "\"",
+    "named": false
+  },
+  {
     "type": "[",
     "named": false
   },
@@ -91,11 +106,11 @@
     "named": false
   },
   {
-    "type": "command_param_id",
-    "named": true
+    "type": "{",
+    "named": false
   },
   {
-    "type": "\"",
+    "type": "}",
     "named": false
   }
 ]

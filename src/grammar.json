@@ -1,75 +1,96 @@
 {
   "name": "naniscript",
   "rules": {
-    "fragment": {
-      "type": "REPEAT",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_node"
-      }
-    },
-    "_node": {
-      "type": "CHOICE",
+    "script": {
+      "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "comment"
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "line"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[\\n\\r]+"
+              }
+            ]
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "define"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "label"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "command"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "inlined_command"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "generic_text"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "expression"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "line"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
-    "_hor_space": {
-      "type": "PATTERN",
-      "value": "[ \\t]+"
+    "line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[ \\t]*"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "comment"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "define"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "label"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "command"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "generic_text"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "PATTERN",
+              "value": "[ \\t]*"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
     },
     "comment": {
       "type": "PATTERN",
       "value": ";[^\\r\\n]*"
-    },
-    "expression": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": 1,
-        "content": {
-          "type": "PATTERN",
-          "value": "{[^{}\\r\\n]+}"
-        }
-      }
-    },
-    "generic_text": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PREC",
-        "value": -1,
-        "content": {
-          "type": "PATTERN",
-          "value": "[^\\r\\n\\[\\]{}]+"
-        }
-      }
     },
     "define": {
       "type": "SEQ",
@@ -83,8 +104,8 @@
           "name": "define_key"
         },
         {
-          "type": "SYMBOL",
-          "name": "_hor_space"
+          "type": "PATTERN",
+          "value": "[ \\t]+"
         },
         {
           "type": "SYMBOL",
@@ -108,16 +129,8 @@
           "value": "#"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_hor_space"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "PATTERN",
+          "value": "[ \\t]*"
         },
         {
           "type": "SYMBOL",
@@ -161,6 +174,118 @@
         }
       ]
     },
+    "command_id": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9_]+"
+    },
+    "command_param": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[ \\t]+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command_param_id"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command_param_value"
+        }
+      ]
+    },
+    "command_nameless_param": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[ \\t]+"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command_param_value"
+        }
+      ]
+    },
+    "command_param_id": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9_]+:"
+    },
+    "command_param_value": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "\""
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "REPEAT1",
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "(\\\\.|[^\"\\r\\n\\[\\]{}])+"
+                  }
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "expression"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": "\""
+            }
+          ]
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "PATTERN",
+                "value": "[^\"\\s\\r\\n:\\[\\]{}@]+"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "generic_text": {
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "expression"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "inlined_command"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\r\\n\\[\\]{}]+"
+            }
+          ]
+        }
+      }
+    },
     "inlined_command": {
       "type": "SEQ",
       "members": [
@@ -197,93 +322,25 @@
         }
       ]
     },
-    "command_id": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z0-9_]+"
-    },
-    "command_param": {
+    "expression": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "_hor_space"
+          "type": "STRING",
+          "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "command_param_id"
+          "type": "PATTERN",
+          "value": "[^\\r\\n{}]*"
         },
         {
-          "type": "SYMBOL",
-          "name": "command_param_value"
+          "type": "STRING",
+          "value": "}"
         }
       ]
-    },
-    "command_nameless_param": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_hor_space"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "command_param_value"
-        }
-      ]
-    },
-    "command_param_id": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z0-9_]+:"
-    },
-    "command_param_value": {
-      "type": "PREC_RIGHT",
-      "value": 0,
-      "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "expression"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "PATTERN",
-                  "value": "[^\"\\s:\\[\\]{}@]+"
-                },
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": "\""
-                    },
-                    {
-                      "type": "PATTERN",
-                      "value": "(\\\\.|[^\"\\n\\[\\]{}])*"
-                    },
-                    {
-                      "type": "STRING",
-                      "value": "\""
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      }
     }
   },
-  "extras": [
-    {
-      "type": "PATTERN",
-      "value": "\\s"
-    }
-  ],
+  "extras": [],
   "conflicts": [],
   "externals": [],
   "inline": [],
