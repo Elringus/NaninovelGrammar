@@ -169,9 +169,9 @@ Test command complete with float list
 ========
 Test inline command
 ========
-text example[command 1 danger:true] more text here [act danger:false true:false]
+text[i] example[command 1 danger:true] more text here [act danger:false true:false]
 ---
-(script (line (generic_text (inlined_command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value))) (inlined_command (command_id) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value))))))
+(script (line (generic_text (inlined_command (command_id)) (inlined_command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value))) (inlined_command (command_id) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value))))))
 
 ========
 Two actions in line
@@ -240,8 +240,15 @@ Expressions blended with named parameter value
 (script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression) (expression))))))
 
 ========
-Memory leak bug
+Escaped braces inside generic text
 ========
-bibe\{ab\{cndum dui dolor tincid\}u\{nt ipsum
+bibe\{abu\}nt ipsum \[sdff j9dj\]
 ---
 (script (line (generic_text)))
+
+========
+Errors inside generic text
+========
+bibe{ab{cndum dui dolor tincid}u{nt [s[fa]sdf [
+---
+(script (line (generic_text)) (error))

@@ -108,5 +108,9 @@
   {
     "type": "expression",
     "named": true
+  },
+  {
+    "type": "error",
+    "named": true
   }
 ]

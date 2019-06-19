@@ -351,7 +351,7 @@
                   },
                   {
                     "type": "PATTERN",
-                    "value": "[^\\r\\n\\[\\]{}]*"
+                    "value": "(\\\\.|[^\\r\\n\\[\\]{}])+"
                   }
                 ]
               }
@@ -416,6 +416,17 @@
         ]
       }
     },
+    "error": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^\\r\\n]*"
+        }
+      }
+    },
     "_hor_space": {
       "type": "TOKEN",
       "content": {
@@ -455,7 +466,12 @@
       }
     }
   },
-  "extras": [],
+  "extras": [
+    {
+      "type": "SYMBOL",
+      "name": "error"
+    }
+  ],
   "conflicts": [],
   "externals": [],
   "inline": [],

@@ -2,20 +2,26 @@ module.exports = grammar({
   name: "naniscript",
   scopeName: "source.naniscript",
 
-  // Handle white space manually.
-  extras: $ => [],
+  extras: $ => [
+    $.error // Error tokens can appear anywhere.
+    // /\s+/ (white space) is manually handled in the rules.
+  ],
 
   rules: {
-    // Script is the root node.
+
+    // Script is the root (master) node.
     script: $ => seq(
       // Script consists of either empty or control lines with line breaks at the end.
-      repeat(choice(seq(optional($._hor_space), $._ver_space), seq($.line, $._ver_space))),
+      repeat(choice(
+        seq(optional($._hor_space), $._ver_space),
+        seq($.line, $._ver_space)
+      )),
       // ... and can end with either empty or control line without a line break at the end.
       optional(choice($._hor_space, $.line))
     ),
 
-    // A control line is: a comment, define, label, command or generic text line.
-    // A control line can optionally be wrapped in hor. space.
+    // Сontrol line is: comment, define, label, command or generic text line.
+    // Сontrol line can optionally be wrapped in hor. space.
     line: $ => seq(
       optional($._hor_space),
       choice(
@@ -28,7 +34,7 @@ module.exports = grammar({
       optional($._hor_space)
     ),
 
-    // Comment is a control line starting with ';'.
+    // Comment is a control line starting with ';' followed by a text.
     comment: $ => seq(';', /[^\r\n]*/),
 
     // Define is a control line starting with '>' followed by a word, a space and a text.
@@ -65,15 +71,19 @@ module.exports = grammar({
     ),
 
     // Generic text is a control line, that doesn't start with any of the other
-    // control line start symbols; consists of a text and can contain inlined commands and expressions.
-    generic_text: $ => choice($.expression, $.inlined_command, seq(/[^\r\n;>#@]./, repeat(choice(
-       $.expression,
-       $.inlined_command,
-       /[^\r\n\[\]{}]*/
-    )))),
+    // control line start symbols; consists of text and can contain inlined commands and expressions.
+    generic_text: $ => choice(
+      $.expression,
+      $.inlined_command,
+      seq(/[^\r\n;>#@]./, repeat(choice(
+         $.expression,
+         $.inlined_command,
+         /(\\.|[^\r\n\[\]{}])+/
+      )))
+    ),
 
-    // A body of a command line, without a starting symbol, but wrapped in `[]`;
-    // can be injected intro generec text lines.
+    // Command line without a starting `@` symbol, but wrapped in `[]`;
+    // can be injected into generec text lines.
     inlined_command: $ => seq(
         '[',
         $.command_id,
@@ -85,6 +95,9 @@ module.exports = grammar({
     // A text wrapped in `{}`; can be injected into generic text lines and
     // command parameter values.
     expression: $ => token(seq('{', /[^\r\n{}]*/, '}')),
+
+    // Used as a fallback when other tokens don't match.
+    error: $ => token(prec(-1, /[^\r\n]*/)),
 
     // Horizontal line space (spaces and tabs).
     _hor_space: $ => token(repeat1(choice(' ', '\t'))),
