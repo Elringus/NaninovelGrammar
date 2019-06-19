@@ -10,168 +10,168 @@ Test define
 ========
 >DefineKey define _ + 3h f[29 j] value *
 ---
-(script (line (define (define_key) (define_value)))
+(script (line (define (define_key) (define_value))))
 
 ========
 Test label
 ========
 # label
 ---
-(script (line (label (label_id)))
+(script (line (label (label_id))))
 
 ========
 Test command no params
 ========
 @command
 ---
-(script (line (command (command_id)))
+(script (line (command (command_id))))
 
 ========
 Test command positive int param
 ========
 @command 1
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command negative int param
 ========
 @command -1
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command positive float param no fraction
 ========
 @command 1.
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command positive float param with fraction
 ========
 @command 1.10
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command negative float param no fraction
 ========
 @command -1.
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command negative float param with fraction
 ========
 @command -1.10
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command bool arg true
 ========
 @command true
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command bool arg false
 ========
 @bgm false
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command string arg one word
 ========
 @command hello$command
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command string arg multiple words
 ========
 @command "hello grizzly"
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command string arg multiple words with quotes
 ========
 @command "hello \"grizzly\""
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command string arg pair
 ========
 @command hello.grizzly
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command arg string array
 ========
 @command one,two,three
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command arg int array
 ========
 @command 1,2,3
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command arg bool array
 ========
 @command true,false,true
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
 ========
 Test command named arg string
 ========
 @command hi:grizzly
 ---
-(script (line (command (command_id) (command_param (command_param_id) (command_param_value))))
+(script (line (command (command_id) (command_param (command_param_id) (command_param_value)))))
 
 ========
 Test command named arg int
 ========
 @command hi:1
 ---
-(script (line (command (command_id) (command_param (command_param_id) (command_param_value))))
+(script (line (command (command_id) (command_param (command_param_id) (command_param_value)))))
 
 ========
 Test command named arg bool
 ========
 @command hi:true
 ---
-(script (line (command (command_id) (command_param (command_param_id) (command_param_value))))
+(script (line (command (command_id) (command_param (command_param_id) (command_param_value)))))
 
 ========
 Test command complete
 ========
 @command 1 in:forest danger:true
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value)) ))
+(script (line (command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value)) )))
 
 ========
 Test command complete with float list
 ========
 @char 1 pos:0.25,-0.75 look:right
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value)) ))
+(script (line (command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value)) )))
 
 ========
 Test inline command
 ========
 text example[command 1 danger:true] more text here [act danger:false true:false]
 ---
-(script (line (generic_text) (inlined_command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value))) (generic_text) (inlined_command (command_id) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value))))
+(script (line (generic_text (inlined_command (command_id) (command_nameless_param (command_param_value)) (command_param (command_param_id) (command_param_value))) (inlined_command (command_id) (command_param (command_param_id) (command_param_value)) (command_param (command_param_id) (command_param_value))))))
 
 ========
 Two actions in line
@@ -179,7 +179,7 @@ Two actions in line
 @action1
 @action2
 ---
-(script (line (command (command_id)) (command (command_id)))
+(script (line (command (command_id))) (line (command (command_id))))
 
 ========
 Command and new line generic
@@ -187,7 +187,7 @@ Command and new line generic
 @printer
 Massa ut elementum.
 ---
-(script (line (command (command_id)) (generic_text))
+(script (line (command (command_id))) (line (generic_text)))
 
 ========
 Command with param and new line generic
@@ -195,46 +195,53 @@ Command with param and new line generic
 @printer Wide
 Integer
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value))) (generic_text))
+(script (line (command (command_id) (command_nameless_param (command_param_value)))) (line (generic_text)))
 
 ========
 Expression
 ========
 { Abs(a, d) + 12 - 1 / -230.0 + "Lol ipsum" }
 ---
-(script (line (expression))
+(script (line (generic_text (expression))))
 
 ========
 Expressions inside a generic text line
 ========
 actor: Loreim ipsu,{ Abs(a, d) + 12 - 1 / -230.0 + "Lol ipsum" } doler sit amen {¯\_(ツ)_/¯}.
 ---
-(script (line (generic_text) (expression) (generic_text) (expression) (generic_text))
+(script (line (generic_text (expression) (expression))))
 
 ========
 Expression instead of nameless parameter value
 ========
 @command {x > 0}
 ---
-(script (line (command (command_id)) (expression))
-
-========
-Expression instead of named parameter value
-========
-@command param:{x > 0}
----
-(script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression)))))
-
-========
-Expressions blended with named parameter value
-========
-@command param:32r2f,df{x > 0},d.{Abs(0) + 12.24 > 0}ff
----
-(script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression) (expression)))))
+(script (line (command (command_id) (command_nameless_param (command_param_value (expression))))))
 
 ========
 Expression blended with nameless parameter value
 ========
 @command sdf{x > 0}df
 ---
-(script (line (command (command_id) (command_nameless_param (command_param_value (expression)))))
+(script (line (command (command_id) (command_nameless_param (command_param_value (expression))))))
+
+========
+Expression instead of named parameter value
+========
+@command param:{x > 0}
+---
+(script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression))))))
+
+========
+Expressions blended with named parameter value
+========
+@command param:32r2f,df{x > 0},d.{Abs(0) + 12.24 > 0}ff
+---
+(script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression) (expression))))))
+
+========
+Memory leak bug
+========
+bibe\{ab\{cndum dui dolor tincid\}u\{nt ipsum
+---
+(script (line (generic_text)))
