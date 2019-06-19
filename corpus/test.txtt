@@ -249,6 +249,15 @@ bibe\{abu\}nt ipsum \[sdff j9dj\]
 ========
 Errors inside generic text
 ========
-bibe{ab{cndum dui dolor tincid}u{nt [s[fa]sdf [
+bibe{ab{cndum dui dolor tincidu{nt [s[fa]sdf [
 ---
-(script (line (generic_text)) (error))
+(script (line (generic_text)) (ERROR (UNEXPECTED '{')))
+
+========
+Errors when defining control lines
+========
+#
+>
+@
+---
+(script (ERROR (error)) (ERROR))

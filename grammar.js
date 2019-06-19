@@ -97,7 +97,7 @@ module.exports = grammar({
     expression: $ => token(seq('{', /[^\r\n{}]*/, '}')),
 
     // Used as a fallback when other tokens don't match.
-    error: $ => token(prec(-1, /[^\r\n]*/)),
+    error: $ => token(prec(-1, /[\s\S]+/)),
 
     // Horizontal line space (spaces and tabs).
     _hor_space: $ => token(repeat1(choice(' ', '\t'))),
