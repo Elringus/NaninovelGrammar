@@ -65,10 +65,11 @@ module.exports = grammar({
         $.command_param_value,
     ),
     command_param_id: $ => /[a-zA-Z0-9_]+:/,
-    command_param_value: $ => choice(
-      seq('"', choice(repeat1(/(\\.|[^"\r\n\[\]{}])+/), $.expression), '"'),
-      repeat1(choice(/[^"\s\r\n:\[\]{}@]+/, $.expression))
-    ),
+    command_param_value: $ => repeat1(choice(
+      seq('"', repeat(choice(/(\\.|[^"\r\n\[\]{}])+/, $.expression)), '"'),
+      /[^"\s\r\n:\[\]{}@]+/,
+      $.expression
+    )),
 
     // Generic text is a control line, that doesn't start with any of the other
     // control line start symbols; consists of text and can contain inlined commands and expressions.

@@ -27,6 +27,13 @@ Command with no parameters
 (script (line (command (command_id))))
 
 ========
+Command with no parameters, whitespace before
+========
+ @command
+---
+(script (line (command (command_id))))
+
+========
 Command with positive int paramater
 ========
 @command 1
@@ -100,6 +107,13 @@ Command with quoted string nameless parameter
 Command with quoted string nameless parameter with escaped quotes in the value
 ========
 @command "hello \"grizzly\""
+---
+(script (line (command (command_id) (command_nameless_param (command_param_value)))))
+
+========
+Command with set expression in nameless parameter
+========
+@set choice="moe"
 ---
 (script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
@@ -231,6 +245,13 @@ Expression instead of named parameter value
 @command param:{x > 0}
 ---
 (script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression))))))
+
+========
+Expressions inside a named parameter value wrapped in quotes
+========
+@print text:"{a} < {b}"
+---
+(script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression) (expression))))))
 
 ========
 Expressions blended with named parameter value

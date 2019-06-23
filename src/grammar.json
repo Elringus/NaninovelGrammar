@@ -269,54 +269,49 @@
       "value": "[a-zA-Z0-9_]+:"
     },
     "command_param_value": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "\""
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "REPEAT1",
-                  "content": {
-                    "type": "PATTERN",
-                    "value": "(\\\\.|[^\"\\r\\n\\[\\]{}])+"
-                  }
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "expression"
-                }
-              ]
-            },
-            {
-              "type": "STRING",
-              "value": "\""
-            }
-          ]
-        },
-        {
-          "type": "REPEAT1",
-          "content": {
-            "type": "CHOICE",
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SEQ",
             "members": [
               {
-                "type": "PATTERN",
-                "value": "[^\"\\s\\r\\n:\\[\\]{}@]+"
+                "type": "STRING",
+                "value": "\""
               },
               {
-                "type": "SYMBOL",
-                "name": "expression"
+                "type": "REPEAT",
+                "content": {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "PATTERN",
+                      "value": "(\\\\.|[^\"\\r\\n\\[\\]{}])+"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "expression"
+                    }
+                  ]
+                }
+              },
+              {
+                "type": "STRING",
+                "value": "\""
               }
             ]
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^\"\\s\\r\\n:\\[\\]{}@]+"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "expression"
           }
-        }
-      ]
+        ]
+      }
     },
     "generic_text": {
       "type": "CHOICE",
