@@ -21,9 +21,7 @@ module.exports = grammar({
     ),
 
     // Сontrol line is: comment, define, label, command or generic text line.
-    // Сontrol line can optionally be wrapped in hor. space.
     line: $ => seq(
-      optional($._hor_space),
       choice(
         $.comment,
         $.define,
@@ -31,29 +29,30 @@ module.exports = grammar({
         $.command,
         $.generic_text
       ),
-      optional($._hor_space)
     ),
 
     // Comment is a control line starting with ';' followed by a text.
-    comment: $ => seq(';', /[^\r\n]*/),
+    comment: $ => seq(optional($._hor_space), ';', /[^\r\n]*/),
 
     // Define is a control line starting with '>' followed by a word, a space and a text.
-    define: $ => seq('>', $.define_key, $._hor_space, $.define_value),
+    define: $ => seq(optional($._hor_space), '>', $.define_key, $._hor_space, $.define_value),
     define_key: $ => /[a-zA-Z0-9_]+/,
     define_value: $ => /[^{}\r\n]+/,
 
     // Label is a control line starting with '#' followed by an optional space and a word.
-    label: $ => seq('#', optional($._hor_space), $.label_id),
+    label: $ => seq(optional($._hor_space), '#', optional($._hor_space), $.label_id),
     label_id: $ => /[a-zA-Z0-9_]+/,
 
     // Command is a control line starting with '@' followed by a word, a space,
     // an optional nameless paramater and multiple optional named parameters splitted by spaces.
-    command: $ => prec.right(seq(
+    command: $ => seq(
+        optional($._hor_space),
         '@',
         $.command_id,
         optional($.command_nameless_param),
-        repeat($.command_param)
-    )),
+        repeat($.command_param),
+        optional($._hor_space)
+    ),
     command_id: $ => /[a-zA-Z0-9_]+/,
     command_nameless_param: $ => seq(
       $._hor_space,
@@ -73,15 +72,14 @@ module.exports = grammar({
 
     // Generic text is a control line, that doesn't start with any of the other
     // control line start symbols; consists of text and can contain inlined commands and expressions.
-    generic_text: $ => choice(
-      $.expression,
-      $.inlined_command,
-      seq(/[^\r\n;>#@]./, repeat(choice(
-         $.expression,
-         $.inlined_command,
-         /(\\.|[^\r\n\[\]{}])+/
-      )))
-    ),
+    generic_text: $ => seq(
+      optional($._hor_space),
+      repeat1(choice(
+        $.expression,
+        $.inlined_command,
+        seq(/[^;>#@\s\[\]{}].?/, /(\\.|[^\r\n\[\]{}])*/)
+      )
+    )),
 
     // Command line without a starting `@` symbol, but wrapped in `[]`;
     // can be injected into generec text lines.
@@ -90,12 +88,13 @@ module.exports = grammar({
         $.command_id,
         optional($.command_nameless_param),
         repeat($.command_param),
-        ']'
+        ']',
+        optional($._hor_space)
     ),
 
     // A text wrapped in `{}`; can be injected into generic text lines and
     // command parameter values.
-    expression: $ => token(seq('{', /[^\r\n{}]*/, '}')),
+    expression: $ => token(seq('{', /[^\r\n{}]*/, '}', optional(/[ \t]*/))),
 
     // Used as a fallback when other tokens don't match.
     error: $ => token(prec(-1, /[\s\S]+/)),
