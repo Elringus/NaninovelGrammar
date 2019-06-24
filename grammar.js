@@ -21,14 +21,12 @@ module.exports = grammar({
     ),
 
     // Сontrol line is: comment, define, label, command or generic text line.
-    line: $ => seq(
-      choice(
-        $.comment,
-        $.define,
-        $.label,
-        $.command,
-        $.generic_text
-      ),
+    line: $ => choice(
+      $.comment,
+      $.define,
+      $.label,
+      $.command,
+      $.generic_text
     ),
 
     // Comment is a control line starting with ';' followed by a text.
