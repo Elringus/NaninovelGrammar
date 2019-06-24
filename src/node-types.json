@@ -2,7 +2,25 @@
   {
     "type": "command",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "command_id",
+          "named": true
+        },
+        {
+          "type": "command_nameless_param",
+          "named": true
+        },
+        {
+          "type": "command_param",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "command_id",
@@ -12,17 +30,51 @@
   {
     "type": "command_nameless_param",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "command_param_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "command_param",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "command_param_id",
+          "named": true
+        },
+        {
+          "type": "command_param_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "command_param_value",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "comment",
@@ -32,7 +84,21 @@
   {
     "type": "define",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "define_key",
+          "named": true
+        },
+        {
+          "type": "define_value",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "define_key",
@@ -42,17 +108,59 @@
   {
     "type": "generic_text",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "inlined_command",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "inlined_command",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "command_id",
+          "named": true
+        },
+        {
+          "type": "command_nameless_param",
+          "named": true
+        },
+        {
+          "type": "command_param",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "label",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "label_id",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "label_id",
@@ -62,12 +170,48 @@
   {
     "type": "line",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "command",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "define",
+          "named": true
+        },
+        {
+          "type": "generic_text",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "script",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "line",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": ";",
