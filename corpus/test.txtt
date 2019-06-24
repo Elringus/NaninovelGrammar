@@ -20,6 +20,13 @@ Label
 (script (line (label (label_id))))
 
 ========
+Error: space after command symbol
+========
+@ command
+---
+(script (line (command (error) (command_id))))
+
+========
 Command with no parameters
 ========
 @command
