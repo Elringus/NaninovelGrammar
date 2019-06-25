@@ -24,7 +24,7 @@ Error: space after command symbol
 ========
 @ command
 ---
-(script (line (command (error) (command_id))))
+(script (line (command (ERROR) (command_id))))
 
 ========
 Command with no parameters
@@ -37,6 +37,55 @@ Command with no parameters
 Command with no parameters, whitespace before
 ========
  @command
+---
+(script (line (command (command_id))))
+
+========
+Command with no parameters, tab before
+========
+  @command
+---
+(script (line (command (command_id))))
+
+========
+Command with no parameters, tabs and spaces before
+========
+       @command
+---
+(script (line (command (command_id))))
+
+========
+Command with no parameters, wrapped in whitespace
+========
+       @command             
+---
+(script (line (command (command_id))))
+
+========
+Command with no parameters, trailing space
+========
+@command 
+---
+(script (line (command (command_id))))
+
+========
+Command with no parameters, multiple trailing spaces
+========
+@command        
+---
+(script (line (command (command_id))))
+
+========
+Command with no parameters, trailing tab
+========
+@command  
+---
+(script (line (command (command_id))))
+
+========
+Command with no parameters, trailing tabs and spaces
+========
+@command            
 ---
 (script (line (command (command_id))))
 
@@ -99,7 +148,7 @@ Command with bool parameter and negative value
 ========
 Command with string parameter
 ========
-@command hello$command
+@command hello$co\:mma"d"
 ---
 (script (line (command (command_id) (command_nameless_param (command_param_value)))))
 
@@ -268,9 +317,16 @@ Expressions blended with named parameter value
 (script (line (command (command_id) (command_param (command_param_id) (command_param_value (expression) (expression))))))
 
 ========
+Expressions instead of nameless parameter and a quoted parameter
+========
+@print {remark} if:remark=="Saying \\"Stop { "the" } car\\" was a mistake."
+---
+(script (line (command (command_id) (command_nameless_param (command_param_value (expression))) (command_param (command_param_id) (command_param_value (expression))))))
+
+========
 Escaped braces inside generic text
 ========
-bibe\{abu\}nt ipsum \[sdff j9dj\]
+bibe\{abu\}nt @ >ip#s;um< @ \[sdff j9dj\]
 ---
 (script (line (generic_text)))
 
@@ -288,4 +344,4 @@ Errors when defining control lines
 >
 @
 ---
-(script (ERROR (error)) (ERROR))
+(script (ERROR) (ERROR) (ERROR))
