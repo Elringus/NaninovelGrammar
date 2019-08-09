@@ -27,6 +27,13 @@ Error: space after command symbol
 (script (line (command (ERROR) (command_id))))
 
 ========
+Error: colon after command ID
+========
+@command:
+---
+(script (line (command (command_id))) (ERROR (UNEXPECTED ':')))
+
+========
 Command with no parameters
 ========
 @command
