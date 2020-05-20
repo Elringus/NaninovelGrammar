@@ -21,7 +21,7 @@
     "build": "tree-sitter generate && node-gyp build",
     "install": "prebuild-install || node-gyp rebuild",
     "cleanup": "rm -rf build && rm -rf prebuilds",
-    "pre-build": "yarn run cleanup && prebuild -r electron -t 3.0.0 -t 4.0.0 -t 4.0.4 -t 5.0.0 --strip && prebuild -t 8.16.0 -t 10.12.0 --strip && prebuild --upload-all",
+    "pre-build": "yarn run cleanup && prebuild -r electron -t 3.0.0 -t 4.0.0 -t 4.0.4 -t 5.0.0 --strip && prebuild --upload-all",
     "pre-build:upload": "prebuild --upload-all",
     "compile": "npm install && node-gyp configure && node_modules/.bin/tree-sitter generate && node-gyp build",
     "test": "node_modules/.bin/tree-sitter test",
